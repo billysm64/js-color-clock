@@ -7,6 +7,10 @@
   font-size: 4rem;
 }
 
+.clock-display:hover {
+
+}
+
 .clock-face {
   height: 100%;
   display: flex;
