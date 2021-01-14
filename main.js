@@ -30,6 +30,8 @@ function whenMouseOver(a, b, c) {
   document.querySelector(".clock-display").textContent = "" + toHex(a) + ":" + toHex(b) + ":" + toHex(c);
 }
 
+let isHovering = false
+
 setInterval(function(){
   //updates the time constantly here
   let hours = addZeros(new Date().getHours());
@@ -39,6 +41,19 @@ setInterval(function(){
   let clockDisplay = document.querySelector(".clock-display");
   clockDisplay.textContent = currentTime;
   console.log(currentTime);
+  let hexString = "#" + toHex(hours) + toHex(minutes) + toHex(seconds);
+  let hexTime = "" + toHex(hours) + ":" + toHex(minutes) + ":" + toHex(seconds);
+  document.querySelector(".clock-display").addEventListener("mouseover", (e) => { //Patrick's method, seen here, gives
+    isHovering = true
+  });
+  document.querySelector(".clock-display").addEventListener("mouseout", (e) => {
+    isHovering = false
+  });
+  if (isHovering) {
+    document.querySelector(".clock-display").innerHTML = hexTime;
+  } else {
+    document.querySelector(".clock-display").innerHTML = currentTime;
+  }
   let secondsPercent = (seconds / 60) * 100;
   let barPercent = (secondsPercent * 14) / 100; //See math below this function for shown work; will show the percentage of 14 based on the percentage of 60
   document.querySelector(".clock-progress-bar").style.width=`${barPercent}rem`;; //change width of progress bar
@@ -46,7 +61,6 @@ setInterval(function(){
   console.log(`Minutes: ${toHex(minutes)}`);
   console.log(`Seconds: ${toHex(seconds)}`);
   //create hexadecimal value
-  let hexString = "#" + toHex(hours) + toHex(minutes) + toHex(seconds);
   document.querySelector(".clock").style.background = hexString;
   console.log(hexString);
   // document.querySelector(".clock-display").addEventListener("onmouseenter", whenMouseOver(hours, minutes, seconds)); // Will not work, for some reason displays hex value at clock all the time...
