@@ -21,6 +21,7 @@ function addZeros(unit) {
 // console.log(clockDisplay.textContent)
 // clockDisplay.textContent = currentTime;
 
+//converts to hexadecimal
 function toHex(unit) {
   return addZeros(Number(unit).toString(16))
 }
@@ -40,10 +41,11 @@ setInterval(function(){
   console.log(currentTime);
   let secondsPercent = (seconds / 60) * 100;
   let barPercent = (secondsPercent * 14) / 100; //See math below this function for shown work; will show the percentage of 14 based on the percentage of 60
-  document.querySelector(".clock-progress-bar").style.width=`${barPercent}rem`;;
+  document.querySelector(".clock-progress-bar").style.width=`${barPercent}rem`;; //change width of progress bar
   console.log(`Hours: ${toHex(hours)}`);
   console.log(`Minutes: ${toHex(minutes)}`);
   console.log(`Seconds: ${toHex(seconds)}`);
+  //create hexadecimal value
   let hexString = "#" + toHex(hours) + toHex(minutes) + toHex(seconds);
   document.querySelector(".clock").style.background = hexString;
   console.log(hexString);
